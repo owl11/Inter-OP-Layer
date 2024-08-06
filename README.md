@@ -22,6 +22,7 @@ While the OP team is actively building out the [Interoperability layer](https://
   - [Standard-Bridge](#standard-bridge)
   - [ERC721Bridge](#erc721-bridge)
 - [etc](#etc-wip) : expriemetnal contracts meant to work on top of the existing Bedrock contracts, much like the [Bedrock-utils](#bedrock-utils) except they aren't functional just yet, and only include an experimental Create2Deployer built on top of the existing crossDomainMessanger
+
 ## Usage
 
 #### Setup
@@ -47,6 +48,7 @@ While the OP team is actively building out the [Interoperability layer](https://
    ```
 
    from there, the contracts should compile just fine.
+
 ## contracts overview:
 
 ### Bedrock contracts Forks
@@ -83,7 +85,6 @@ Since the Standard bridge handles both ETH and ERC20's, this builds out on those
 
 expriemental features built out on top of the bedrock contracts that may have some benfit exploring further.
 
-
 ## BUGS AND IMPROVEMENTS
 
 The batch senders in both the forks and the wrappers will fail in the case one transfer fails, there is a solution to that, which is wrapping the calls in encoded calls rather than functoin calls, but for now be wary when using it
@@ -91,3 +92,5 @@ The batch senders in both the forks and the wrappers will fail in the case one t
 imrovement: batch sending is done to the msg sender only, build a function that batch sends to an array of recipents on the L1 standard bridge
 
 please do provide feedback by submitting an issue, anything you see off or any potential improvements
+
+ATTENTION: These contracts are configured for testnet usage, and remain highly expriemental, and only tested at Sepolia or similar testnets, in order to use them for production use or mainnet, further configurations/modifications are due, please be advised.
