@@ -105,7 +105,7 @@ The current implementation seeks to unifiy the entry point to the optimism porta
 If you'd like to test the wrapper, you can go to the contract's webpage listed above, and input these entries in your favourite block explorer
 
 ```sh
-0.1, [11155420 ,999999999 ,84532 ,919 ,4460 ,58008 ,4202]
+0.1, [11155420, 999999999, 84532, 919, 4460, 58008, 4202]
 ```
 
 where the 0.1 represents 0.1 Eth, which is insginifcat for testing on Sepolia, and the array of numbers is the OP chains our OP Chain registry has Defined.
