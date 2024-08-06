@@ -7,6 +7,7 @@ At the intersection of L2's, we found interoperability.
 The Inter-OP Layer is a set of experimental contracts that seek unify the entry point to all OP-Stack compatible chains, Our goal is to enhance interoperability across various OP L2's (and perhaps one day All Layer 2's).
 
 DISCLAIMER: These contracts have not been audited, and are highly experimental, they are provided on an "as is" basis, users should proceed at their own risk.
+[further discliamers](#disclaimers)
 
 ## Overview
 
@@ -93,4 +94,18 @@ imrovement: batch sending is done to the msg sender only, build a function that 
 
 please do provide feedback by submitting an issue, anything you see off or any potential improvements
 
+## DISCLAIMERS
+
 ATTENTION: These contracts are configured for testnet usage, and remain highly expriemental, and only tested at Sepolia or similar testnets, in order to use them for production use or mainnet, further configurations/modifications are due, please be advised.
+
+The current implementation seeks to unifiy the entry point to the optimism portal, while modifying everything in between, we treat the op portal as the modular kernel, aiming to not modify it, while touching upon everything surrounding it, the aim of this fork is to bring upon a unified entry point, for now, the [Bedrock-Utils](#bedrock-Utils) are a good example of what we would like to do, they are deployed on [Sepolia](https://sepolia.etherscan.io/address/0x66449d17e24c52a4fb0ca88f98e3f5f4431a022d#code) and while the code is not perfect, we have a poc of a multi deposit to 7 OP chains within the same [transaction](https://sepolia.etherscan.io/tx/0x9de12f0f3f8b495031ed195e263351698aec4a37e9d5403ef7c04d9d73bb0742)
+
+## TEST IT?
+
+If you'd like to test the wrapper, you can go to the contract's webpage listed above, and input these entries in your favourite block explorer
+
+```sh
+0.1, [11155420 ,999999999 ,84532 ,919 ,4460 ,58008 ,4202]
+```
+
+where the 0.1 represents 0.1 Eth, which is insginifcat for testing on Sepolia, and the array of numbers is the OP chains our OP Chain registry has Defined.
