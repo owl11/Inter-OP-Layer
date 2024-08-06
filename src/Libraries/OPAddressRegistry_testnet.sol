@@ -63,8 +63,8 @@ contract OPAddressRegistry_Testnet {
 
         OPchainAddressse[OP_CHAIN_IDS_TESTNETS.FRAXTAL_SEPOLIA_TESTNET_CHAIN_ID] = ChainAddresses({
             crossDomainMessenger: OP_CHAINS_ADDRESSES_T.FRAXTAL_L1_CROSS_DOMAIN_MESSENGER,
-            standardBridge: OP_CHAINS_ADDRESSES_T.FRAXTAL_L1_CROSS_DOMAIN_MESSENGER,
-            optimismPortal: OP_CHAINS_ADDRESSES_T.FRAXTAL_L1_CROSS_DOMAIN_MESSENGER
+            standardBridge: OP_CHAINS_ADDRESSES_T.FRAXTAL_L1_STANDARD_BRIDGE,
+            optimismPortal: OP_CHAINS_ADDRESSES_T.FRAXTAL_L1_OPTIMISM_PORTAL
         });
 
         OPchainAddressse[OP_CHAIN_IDS_TESTNETS.METAL_L2_HOLESKY_CHAIN_ID] = ChainAddresses({
