@@ -1,6 +1,7 @@
 # Compiler files
 cache/
 out/
+lib/forge-std
 
 # Ignores development broadcast logs
 !/broadcast
