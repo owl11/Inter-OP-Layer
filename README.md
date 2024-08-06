@@ -31,7 +31,7 @@ While the OP team is actively building out the [Interoperability layer](https://
 1. Install the `contracts-bedrock` (v0.15.0) library (assuming you already have Node.js and yarn):
 
    ```sh
-   cd foundry/lib
+   cd lib
    yarn
    ```
 
