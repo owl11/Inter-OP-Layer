@@ -49,8 +49,8 @@ contract OPAddressRegistry {
 
         OPchainAddressse[OP_CHAIN_IDS_MAINNET.FRAXTAL_MAINNT_CHAIN_ID] = ChainAddresses({
             crossDomainMessenger: OP_CHAINS_ADDRESSES_M.FRAXTAL_L1_CROSS_DOMAIN_MESSENGER,
-            standardBridge: OP_CHAINS_ADDRESSES_M.FRAXTAL_L1_CROSS_DOMAIN_MESSENGER,
-            optimismPortal: OP_CHAINS_ADDRESSES_M.FRAXTAL_L1_CROSS_DOMAIN_MESSENGER
+            standardBridge: OP_CHAINS_ADDRESSES_M.FRAXTAL_L1_STANDARD_BRIDGE,
+            optimismPortal: OP_CHAINS_ADDRESSES_M.FRAXTAL_L1_OPTIMISM_PORTAL
         });
 
         OPchainAddressse[OP_CHAIN_IDS_MAINNET.METAL_L2_MAINNET_CHAIN_ID] = ChainAddresses({
