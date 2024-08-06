@@ -87,7 +87,7 @@ expriemental features built out on top of the bedrock contracts that may have so
 
 ## BUGS AND IMPROVEMENTS
 
-The batch senders in both the forks and the wrappers will fail in the case one transfer fails, there may be a solution to that, but for now be wary if using it
+The batch senders in both the forks and the wrappers will fail in the case one transfer fails, there is a solution to that, which is wrapping the calls in encoded calls rather than functoin calls, but for now be wary when using it
 
 imrovement: batch sending is done to the msg sender only, build a function that batch sends to an array of recipents on the L1 standard bridge
 
