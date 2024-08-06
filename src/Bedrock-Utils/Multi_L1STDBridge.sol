@@ -7,7 +7,7 @@ import {ICrossDomainMessenger} from "../interfaces/ICrossDomainMessanger.sol";
 import "@eth-optimism/contracts-bedrock/contracts/L1/L1StandardBridge.sol";
 import {OPAddressRegistry_Testnet} from "./../Libraries/OPAddressRegistry_testnet.sol";
 
-contract FromL1_ControlL2Greeter is OPAddressRegistry_Testnet {
+contract Multi_L1STDBridge is OPAddressRegistry_Testnet {
     function quickDepositToAnyChain(uint256[] memory chainIDs) external payable {
         require(chainIDs.length > 0, "No chain IDs provided");
         require(msg.value > 0, "Must send ETH to deposit");
