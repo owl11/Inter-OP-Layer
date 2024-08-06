@@ -10,7 +10,7 @@ DISCLAIMER: These contracts have not been audited, and are highly experimental, 
 
 ## Overview
 
-While the OP team is actively building out the [Iteroperability layer](https://specs.optimism.io/interop/overview.html) for the L2 side of things, we set out to make the L1 contracts equally interoperable, this means enabling batch-sending to multiple OP chains in single transaction and facilitating batch-sending of cross-Domain messages.
+While the OP team is actively building out the [Interoperability layer](https://specs.optimism.io/interop/overview.html) for the L2 side of things, we set out to make the L1 contracts equally interoperable, this means enabling batch-sending to multiple OP chains in single transaction and facilitating batch-sending of cross-Domain messages.
 
 ### Components
 
