@@ -1,15 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.15;
 
-import { AddressAliasHelper } from "@eth-optimism/contracts-bedrock/contracts/vendor/AddressAliasHelper.sol";
-import { Predeploys } from "@eth-optimism/contracts-bedrock/contracts/libraries/Predeploys.sol";
-import { CrossDomainMessenger } from "@eth-optimism/contracts-bedrock/contracts/universal/CrossDomainMessenger.sol";
-import { Semver } from "@eth-optimism/contracts-bedrock/contracts/universal/Semver.sol";
-import { L2ToL1MessagePasser } from "@eth-optimism/contracts-bedrock/contracts/L2/L2ToL1MessagePasser.sol";
+import {AddressAliasHelper} from "@eth-optimism/contracts-bedrock/contracts/vendor/AddressAliasHelper.sol";
+import {Predeploys} from "@eth-optimism/contracts-bedrock/contracts/libraries/Predeploys.sol";
+import {CrossDomainMessenger} from "../../Bedrock-Universals-Forks/CrossDomainMessengerModified.sol";
+// import {OPAddressRegistry_Testnet} from "../../Libraries/OPAddressRegistry_testnet.sol";
+import {Semver} from "@eth-optimism/contracts-bedrock/contracts/universal/Semver.sol";
+import {L2ToL1MessagePasser} from "@eth-optimism/contracts-bedrock/contracts/L2/L2ToL1MessagePasser.sol";
 
 /**
  * @custom:proxied
- * @custom:predeploy 0x4200000000000000000000000000000000000007
+ * @custom:MODIFIED
  * @title L2CrossDomainMessenger
  * @notice The L2CrossDomainMessenger is a high-level interface for message passing between L1 and
  *         L2 on the L2 side. Users are generally encouraged to use this contract instead of lower
@@ -21,10 +22,7 @@ contract L2CrossDomainMessenger is CrossDomainMessenger, Semver {
      *
      * @param _l1CrossDomainMessenger Address of the L1CrossDomainMessenger contract.
      */
-    constructor(address _l1CrossDomainMessenger)
-        Semver(1, 4, 0)
-        CrossDomainMessenger(_l1CrossDomainMessenger)
-    {
+    constructor(address _l1CrossDomainMessenger) Semver(1, 4, 0) CrossDomainMessenger(_l1CrossDomainMessenger) {
         initialize();
     }
 
@@ -48,28 +46,28 @@ contract L2CrossDomainMessenger is CrossDomainMessenger, Semver {
     /**
      * @inheritdoc CrossDomainMessenger
      */
-    function _sendMessage(
-        address _to,
-        uint64 _gasLimit,
-        uint256 _value,
-        bytes memory _data
-    ) internal override {
-        L2ToL1MessagePasser(payable(Predeploys.L2_TO_L1_MESSAGE_PASSER)).initiateWithdrawal{
-            value: _value
-        }(_to, _gasLimit, _data);
+    function _sendMessage(uint256 _targetChainID, address _to, uint64 _gasLimit, uint256 _value, bytes memory _data)
+        internal
+        override
+    {
+        L2ToL1MessagePasser(payable(Predeploys.L2_TO_L1_MESSAGE_PASSER)).initiateWithdrawal{value: _value}(
+            _to, _gasLimit, _data
+        );
     }
 
     /**
      * @inheritdoc CrossDomainMessenger
      */
-    function _isOtherMessenger() internal view override returns (bool) {
+    function _isOtherMessenger(uint256 _targetChainID) internal view override returns (bool) {
         return AddressAliasHelper.undoL1ToL2Alias(msg.sender) == OTHER_MESSENGER;
     }
 
     /**
      * @inheritdoc CrossDomainMessenger
      */
-    function _isUnsafeTarget(address _target) internal view override returns (bool) {
-        return _target == address(this) || _target == address(Predeploys.L2_TO_L1_MESSAGE_PASSER);
+    function _isUnsafeTarget(address _target, uint256 _targetChainID) internal view override returns (bool) {
+        return _target == address(this) || _target == address(Predeploys.L2_TO_L1_MESSAGE_PASSER)
+            || _targetChainID != 11155111; //|| _targetChainID != 1;
+            //Transfers are only passed to ETH or SEPOLIA
     }
 }
