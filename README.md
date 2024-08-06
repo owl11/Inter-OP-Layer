@@ -102,7 +102,7 @@ The current implementation seeks to unifiy the entry point to the optimism porta
 
 ## TEST IT?
 
-If you'd like to test the wrapper, you can go to the contract's webpage listed above, and input these entries in your favourite block explorer
+If you'd like to test the wrapper, you can go to the contract's webpage listed above, and input these entries in your favourite block explorer or click [here](https://sepolia.etherscan.io/address/0x66449d17e24c52a4fb0ca88f98e3f5f4431a022d#writeContract#F3) directly, from there you will populate the `quickDepositToAnyChain()` function with these parameters or similar:
 
 ```sh
 0.1, [11155420, 999999999, 84532, 919, 4460, 58008, 4202]
