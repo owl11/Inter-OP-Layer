@@ -22,7 +22,31 @@ While the OP team is actively building out the [Interoperability layer](https://
   - [Standard-Bridge](#standard-bridge)
   - [ERC721Bridge](#erc721-bridge)
 - [etc](#etc-wip) : expriemetnal contracts meant to work on top of the existing Bedrock contracts, much like the [Bedrock-utils](#bedrock-utils) except they aren't functional just yet, and only include an experimental Create2Deployer built on top of the existing crossDomainMessanger
+## Usage
 
+#### Setup
+
+1. Install the `contracts-bedrock` (v0.15.0) library (assuming you already have Node.js and yarn):
+
+   ```sh
+   cd foundry/lib
+   yarn
+   ```
+
+2. Install the `Solmate` contracts library (perferrably with Forge):
+
+   ```sh
+   cd ..
+   forge install transmissions11/solmate@v7 --no-git
+   ```
+
+3. Install the `Openzeppelin` contracts library, best done with a version that's prior to 5.0.0:
+
+   ```sh
+   forge install openzeppelin/openzeppelin-contracts@v4.9.6 --no-git
+   ```
+
+   from there, the contracts should compile just fine.
 ## contracts overview:
 
 ### Bedrock contracts Forks
@@ -59,31 +83,6 @@ Since the Standard bridge handles both ETH and ERC20's, this builds out on those
 
 expriemental features built out on top of the bedrock contracts that may have some benfit exploring further.
 
-## Usage
-
-#### Setup
-
-1. Install the `contracts-bedrock` (v0.15.0) library (assuming you already have Node.js and yarn):
-
-   ```sh
-   cd foundry/lib
-   yarn
-   ```
-
-2. Install the `Solmate` contracts library (perferrably with Forge):
-
-   ```sh
-   cd ..
-   forge install transmissions11/solmate@v7 --no-git
-   ```
-
-3. Install the `Openzeppelin` contracts library, best done with a version that's prior to 5.0.0:
-
-   ```sh
-   forge install openzeppelin/openzeppelin-contracts@v4.9.6 --no-git
-   ```
-
-   from there, the contracts should compile just fine.
 
 ## BUGS AND IMPROVEMENTS
 
