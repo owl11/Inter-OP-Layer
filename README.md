@@ -21,7 +21,7 @@ While the OP team is actively building out the [Interoperability layer](https://
   - [crossDomainMessanger](#cross-domain-messanger)
   - [Standard-Bridge](#standard-bridge)
   - [ERC721Bridge](#erc721-bridge)
-- [etc](#etc-wip) : expriemetnal contracts meant to work on top of the existin Bedrock contracts, much like the [Bedrock-utils](#bedrock-utils) except they aren't functional just yet, and only include an experimental Create2Deployer built on top of the existing crossDomainMessanger
+- [etc](#etc-wip) : expriemetnal contracts meant to work on top of the existing Bedrock contracts, much like the [Bedrock-utils](#bedrock-utils) except they aren't functional just yet, and only include an experimental Create2Deployer built on top of the existing crossDomainMessanger
 
 ## contracts overview:
 
