@@ -72,8 +72,6 @@ Libraries that make fetching multiple OP chain's addresses, and chain ID's simpl
 
 The classic L1 Cross domain messanger, only it is modified to function with multiple chains, it is made by modifying a few functions to accept an additional parameter `uint256 _targetChainID`, it also builds on the constants provided by the [Libraries](#libraries) contracts.
 
-NOTICE: The `l2CrossDomainMessanger`is unchanged, since it builds out on the older `crossdomainmessanger` universal contract, and updating it to the new one, has little to no benfit.
-
 ### Strandard-Bridge
 
 Similarly, the Standard bridge builds upon the same foundations set out by the OP team in the bedrock contracts, it includes modified features akin to the L1 cross domain messanger, and it further extends this functionality to Bridge not only ETH, but Compatible ERC20's to multiple OP Chains.
