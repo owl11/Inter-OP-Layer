@@ -93,12 +93,6 @@ contract OPAddressRegistry_Testnet {
             standardBridge: OP_CHAINS_ADDRESSES_T.METAL_L1_STANDARD_BRIDGE,
             optimismPortal: OP_CHAINS_ADDRESSES_T.METAL_L1_OPTIMISM_PORTAL
         });
-
-        OPchainAddressse[OP_CHAIN_IDS_TESTNETS.ORDERLY_SEPOLIA_TESTNET_CHAIN_ID] = ChainAddresses({
-            crossDomainMessenger: OP_CHAINS_ADDRESSES_T.METAL_L1_CROSS_DOMAIN_MESSENGER,
-            standardBridge: OP_CHAINS_ADDRESSES_T.METAL_L1_STANDARD_BRIDGE,
-            optimismPortal: OP_CHAINS_ADDRESSES_T.METAL_L1_OPTIMISM_PORTAL
-        });
     }
 
     /// @notice Fetch the addresses for a given chain ID

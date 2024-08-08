@@ -43,13 +43,7 @@ While the OP team is actively building out the [Interoperability layer](https://
    forge install transmissions11/solmate@v7 --no-git
    ```
 
-3. Install the `Openzeppelin` contracts library, best done with a version that's prior to 5.0.0:
-
-   ```sh
-   forge install openzeppelin/openzeppelin-contracts@v4.9.6 --no-git
-   ```
-
-   from there, the contracts should compile just fine.
+   from there, the contracts should compile just fine with remappings working as expected
 
 ## contracts overview:
 
@@ -97,7 +91,7 @@ please do provide feedback by submitting an issue, anything you see off or any p
 
 ATTENTION: These contracts are configured for testnet usage, and remain highly expriemental, and only tested at Sepolia or similar testnets, in order to use them for production use or mainnet, further configurations/modifications are due, please be advised.
 
-The current implementation seeks to unifiy the entry point to the optimism portal, while modifying everything in between, we treate the op portal as the modular kernel, aiming to not modify it, while touching upon everything surrounding it, while sufficient, ciritical assumptions were made, such as that the CrossDomain Messanger could've worked alongside the old one, this quikcly got debunked upon further inspection, the aim of this fork was to bring upon a unified entry point, for now, the [Bedrock-Utils](#bedrock-Utils) are a good example of what it should do but with no changes to existing infra, they are deployed on [Sepolia](https://sepolia.etherscan.io/address/0x66449d17e24c52a4fb0ca88f98e3f5f4431a022d#code) and while the code is not yet finished, we have a poc of a multi deposit to 7 OP chains within the same [transaction](https://sepolia.etherscan.io/tx/0x9de12f0f3f8b495031ed195e263351698aec4a37e9d5403ef7c04d9d73bb0742), which gives a rough idea of what our goal is for the other modified versions of the Bedrock contracts.
+The current implementation seeks to unifiy the entry point to the optimism portal, while modifying everything in between, we treate the op portal as the modular kernel, aiming to not modify it, while touching upon everything surrounding it, while sufficient, ciritical assumptions were made, such as that the CrossDomain Messanger could've worked alongside the old one, this quickly got debunked upon further inspection, the aim of this fork was to bring upon a unified entry point, for now, the [Bedrock-Utils](#bedrock-Utils) are a good example of what it should do but with no changes to existing infra, they are deployed on [Sepolia](https://sepolia.etherscan.io/address/0x66449d17e24c52a4fb0ca88f98e3f5f4431a022d#code) and while the code is not yet finished, we have a poc of a multi deposit to 6 OP chains within the same [transaction](https://sepolia.etherscan.io/tx/0x9de12f0f3f8b495031ed195e263351698aec4a37e9d5403ef7c04d9d73bb0742), which gives a rough idea of what our goal is for the other modified versions of the Bedrock contracts.
 
 ## TEST IT?
 

@@ -4,7 +4,7 @@ pragma solidity 0.8.15;
 import {Predeploys} from "@eth-optimism/contracts-bedrock/contracts/libraries/Predeploys.sol";
 import {Semver} from "@eth-optimism/contracts-bedrock/contracts/universal/Semver.sol";
 import {StandardBridge} from "../../Bedrock-Universals-Forks/StandardBridge.sol";
-import {OPAddressRegistry_Testnet, OP_CHAIN_IDS_TESTNETS} from "../../Libraries/OPAddressRegistry_testnet.sol";
+import {OPAddressRegistry_Testnet, OP_CHAIN_IDS_TESTNETS} from "../../Constants/OPAddressRegistry_testnet.sol";
 
 /**
  * @custom:proxied
