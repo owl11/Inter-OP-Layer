@@ -1,28 +1,29 @@
-# The Inter-OP Layer
+# The Inter-OP Layer (WIP)
 
 At the intersection of L2's, we found interoperability.
 
 ## About
 
-The Inter-OP Layer is a set of experimental contracts that seek unify the entry point to all OP-Stack with an OP-Stack fork which would be interoperable since deplyoemnt.
+The Inter-OP Layer is an OP-Stack fork, incubated in the 2024 superhack, it is a set of experimental contracts that would unify the entry point to OP-chains with an OP-Stack fork which would be interoperable since deplyoemnt.
 
 DISCLAIMER: These contracts have not been audited, and are highly experimental, they are provided on an "as is" basis, users should be wary of risks of using unaudited code.
+
 [further discliamers](#disclaimers)
 
 ## Overview
 
-While the OP team is actively building out the [Interoperability layer](https://specs.optimism.io/interop/overview.html) for the L2 side of things, we set out to make the L1 contracts equally interoperable, this means enabling batch-sending to multiple OP chains in single transaction and facilitating batch-sending of cross-Domain messages as well as more expiremental features.
+While the OP team is actively building out the [Interoperability layer](https://specs.optimism.io/interop/overview.html) for the L2 side of things, in this hypothetical fork, we set out to make the L1 contracts equally interoperable, this means enabling batch-sending to multiple OP chains in single transaction and facilitating batch-sending of cross-Domain messages as well as more expiremental features.
 
 ### Components
 
 - [Bedrock-Utils](#bedrock-Utils) : Utility contracts that wrap around the existing Standard bridge providing an easy and unified entry point to multiple OP chains, maintaining the status quo of each OP Chain's seperate L1 Cross Domain Messanger
 - [Bedrock-Universals-Forks](#bedrock-universals-forks) : The universal Bedrock contracts, modified to enable the the user facing contracts to work with multiple OP Chains (OP Portal's).
-- [Libraries](#libraries): Libraries that simplify fetching multiple OP chain's addresses.
+- [Constants](#constants): Const Libraries that simplify fetching multiple OP chain's addresses.
 - [Bedrock-contract-Forks](#bedrock-contracts-forks) : Modiffied Bedrock contracts that would provide a unified way to access any and all OP-comptaible chains from the L1 and back.
   - [crossDomainMessanger](#cross-domain-messanger)
   - [Standard-Bridge](#standard-bridge)
   - [ERC721Bridge](#erc721-bridge)
-- [etc](#etc-wip) : expriemetnal contracts meant to work on top of the existing Bedrock contracts, much like the [Bedrock-utils](#bedrock-utils) except they aren't functional just yet, and only include an experimental Create2Deployer.
+- [etc](#etc) : expriemetnal contracts meant to work on top of the existing Bedrock contracts, much like the [Bedrock-utils](#bedrock-utils) except they aren't functional just yet, and only include an experimental Create2Deployer.
 
 ## Usage
 
@@ -80,7 +81,7 @@ Similarly, the Standard bridge builds upon the same foundations set out by the O
 
 Since the Standard bridge handles both ETH and ERC20's, this builds out on those foundations, to make it route an ERC-721 (NFT) to any OP-chain.
 
-### etc (WIP)
+### etc
 
 expriemental features built out on top of the bedrock contracts that may have some benfit exploring further.
 
@@ -96,7 +97,7 @@ please do provide feedback by submitting an issue, anything you see off or any p
 
 ATTENTION: These contracts are configured for testnet usage, and remain highly expriemental, and only tested at Sepolia or similar testnets, in order to use them for production use or mainnet, further configurations/modifications are due, please be advised.
 
-The current implementation seeks to unifiy the entry point to the optimism portal, while modifying everything in between, we treat the op portal as the modular kernel, aiming to not modify it, while touching upon everything surrounding it, the aim of this fork is to bring upon a unified entry point, for now, the [Bedrock-Utils](#bedrock-Utils) are a good example of what we would like to do, they are deployed on [Sepolia](https://sepolia.etherscan.io/address/0x66449d17e24c52a4fb0ca88f98e3f5f4431a022d#code) and while the code is not yet finished, we have a poc of a multi deposit to 7 OP chains within the same [transaction](https://sepolia.etherscan.io/tx/0x9de12f0f3f8b495031ed195e263351698aec4a37e9d5403ef7c04d9d73bb0742), which gives a rough idea of what our goal is for the other modified versions of the Bedrock contracts.
+The current implementation seeks to unifiy the entry point to the optimism portal, while modifying everything in between, we treate the op portal as the modular kernel, aiming to not modify it, while touching upon everything surrounding it, while sufficient, ciritical assumptions were made, such as that the CrossDomain Messanger could've worked alongside the old one, this quikcly got debunked upon further inspection, the aim of this fork was to bring upon a unified entry point, for now, the [Bedrock-Utils](#bedrock-Utils) are a good example of what it should do but with no changes to existing infra, they are deployed on [Sepolia](https://sepolia.etherscan.io/address/0x66449d17e24c52a4fb0ca88f98e3f5f4431a022d#code) and while the code is not yet finished, we have a poc of a multi deposit to 7 OP chains within the same [transaction](https://sepolia.etherscan.io/tx/0x9de12f0f3f8b495031ed195e263351698aec4a37e9d5403ef7c04d9d73bb0742), which gives a rough idea of what our goal is for the other modified versions of the Bedrock contracts.
 
 ## TEST IT?
 
