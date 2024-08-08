@@ -8,7 +8,9 @@ import {OP_CHAINS_ADDRESSES_T} from "./L1OptimismAddresses_Testnet.sol";
 /// @notice A registry for storing OP chain addresses based on chain IDs.
 
 contract OPAddressRegistry_Testnet {
-    uint256[] public SUPPORTED_CHAIN_IDS;
+    uint256[] public SUPPORTED_CHAIN_IDS_SEPOLIA;
+    uint256[] public SUPPORTED_CHAIN_IDS_HOLESKY;
+
     // Struct to hold the addresses for various contracts on an OP chain
 
     struct ChainAddresses {
@@ -26,16 +28,16 @@ contract OPAddressRegistry_Testnet {
 
     // Constructor to initialize the registry with known chain addresses
     constructor() {
-        SUPPORTED_CHAIN_IDS.push(OP_CHAIN_IDS_TESTNETS.OP_SEPOLIA_TESTNET_CHAIN_ID);
-        SUPPORTED_CHAIN_IDS.push(OP_CHAIN_IDS_TESTNETS.ZORA_SEPOLIA_TESTNET_CHAIN_ID);
-        SUPPORTED_CHAIN_IDS.push(OP_CHAIN_IDS_TESTNETS.BASE_SEPOLIA_TESTNET_CHAIN_ID);
-        SUPPORTED_CHAIN_IDS.push(OP_CHAIN_IDS_TESTNETS.MODE_SEPOLIA_TESTNET_CHAIN_ID);
-        SUPPORTED_CHAIN_IDS.push(OP_CHAIN_IDS_TESTNETS.FRAXTAL_HOLESKY_TESTNET_CHAIN_ID);
-        SUPPORTED_CHAIN_IDS.push(OP_CHAIN_IDS_TESTNETS.ORDERLY_SEPOLIA_TESTNET_CHAIN_ID);
-        SUPPORTED_CHAIN_IDS.push(OP_CHAIN_IDS_TESTNETS.LISK_SEPOLIA_TESTNET_CHAIN_ID);
+        SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.OP_SEPOLIA_TESTNET_CHAIN_ID);
+        SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.ZORA_SEPOLIA_TESTNET_CHAIN_ID);
+        SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.BASE_SEPOLIA_TESTNET_CHAIN_ID);
+        SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.MODE_SEPOLIA_TESTNET_CHAIN_ID);
+        SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.ORDERLY_SEPOLIA_TESTNET_CHAIN_ID);
+        SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.LISK_SEPOLIA_TESTNET_CHAIN_ID);
         // SUPPORTED_CHAIN_IDS.push(OP_CHAIN_IDS_TESTNETS.REDSTONE_SEPOLIA_TESTNET_CHAIN_ID);
-        SUPPORTED_CHAIN_IDS.push(OP_CHAIN_IDS_TESTNETS.METAL_L2_HOLESKY_CHAIN_ID);
-        SUPPORTED_CHAIN_IDS.push(OP_CHAIN_IDS_TESTNETS.CELO_DANGO_HOLESKY_TESTNET_CHAIN_ID);
+        SUPPORTED_CHAIN_IDS_HOLESKY.push(OP_CHAIN_IDS_TESTNETS.METAL_L2_HOLESKY_CHAIN_ID);
+        SUPPORTED_CHAIN_IDS_HOLESKY.push(OP_CHAIN_IDS_TESTNETS.CELO_DANGO_HOLESKY_TESTNET_CHAIN_ID);
+        SUPPORTED_CHAIN_IDS_HOLESKY.push(OP_CHAIN_IDS_TESTNETS.FRAXTAL_HOLESKY_TESTNET_CHAIN_ID);
 
         // Example initialization
         OPchainAddressse[OP_CHAIN_IDS_TESTNETS.OP_SEPOLIA_TESTNET_CHAIN_ID] = ChainAddresses({
@@ -113,7 +115,7 @@ contract OPAddressRegistry_Testnet {
     /// @notice Update the addresses for a specific chain ID
     /// @param _chainID The chain ID to update
     function isOPAlligned(uint256 _chainID) internal view returns (bool) {
-        uint256[] memory supportedChainIDs = SUPPORTED_CHAIN_IDS;
+        uint256[] memory supportedChainIDs = SUPPORTED_CHAIN_IDS_SEPOLIA;
         for (uint256 i = 0; i < supportedChainIDs.length; i++) {
             if (_chainID == supportedChainIDs[i]) {
                 return true;
