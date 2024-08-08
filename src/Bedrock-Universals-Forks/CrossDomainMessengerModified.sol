@@ -6,7 +6,7 @@ import {SafeCall} from "@eth-optimism/contracts-bedrock/contracts/libraries/Safe
 import {Hashing} from "@eth-optimism/contracts-bedrock/contracts/libraries/Hashing.sol";
 import {Encoding} from "@eth-optimism/contracts-bedrock/contracts/libraries/Encoding.sol";
 import {Constants} from "@eth-optimism/contracts-bedrock/contracts/libraries/Constants.sol";
-import {OPAddressRegistry_Testnet} from "../Libraries/OPAddressRegistry_testnet.sol";
+import {OPAddressRegistry_Testnet} from "../Constants/OPAddressRegistry_testnet.sol";
 
 /**
  * @custom:legacy

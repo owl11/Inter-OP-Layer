@@ -4,25 +4,25 @@ At the intersection of L2's, we found interoperability.
 
 ## About
 
-The Inter-OP Layer is a set of experimental contracts that seek unify the entry point to all OP-Stack compatible chains, Our goal is to enhance interoperability across various OP L2's (and perhaps one day All Layer 2's).
+The Inter-OP Layer is a set of experimental contracts that seek unify the entry point to all OP-Stack with an OP-Stack fork which would be interoperable since deplyoemnt.
 
-DISCLAIMER: These contracts have not been audited, and are highly experimental, they are provided on an "as is" basis, users should proceed at their own risk.
+DISCLAIMER: These contracts have not been audited, and are highly experimental, they are provided on an "as is" basis, users should be wary of risks of using unaudited code.
 [further discliamers](#disclaimers)
 
 ## Overview
 
-While the OP team is actively building out the [Interoperability layer](https://specs.optimism.io/interop/overview.html) for the L2 side of things, we set out to make the L1 contracts equally interoperable, this means enabling batch-sending to multiple OP chains in single transaction and facilitating batch-sending of cross-Domain messages.
+While the OP team is actively building out the [Interoperability layer](https://specs.optimism.io/interop/overview.html) for the L2 side of things, we set out to make the L1 contracts equally interoperable, this means enabling batch-sending to multiple OP chains in single transaction and facilitating batch-sending of cross-Domain messages as well as more expiremental features.
 
 ### Components
 
-- [Bedrock-Utils](#bedrock-Utils) : Utility contracts that wrap around the existing Standard bridge providing an easy and unified entry point to multiple PO chains, maintaining the status quo of each OP Chain's seperate L1 Cross Domain Messanger
+- [Bedrock-Utils](#bedrock-Utils) : Utility contracts that wrap around the existing Standard bridge providing an easy and unified entry point to multiple OP chains, maintaining the status quo of each OP Chain's seperate L1 Cross Domain Messanger
 - [Bedrock-Universals-Forks](#bedrock-universals-forks) : The universal Bedrock contracts, modified to enable the the user facing contracts to work with multiple OP Chains (OP Portal's).
-- [Libraries](#libraries): Libraries that make fetching simplify fetching multiple OP chain's addresses for enchanced interoperability.
-- [Bedrock-contract-Forks](#bedrock-contracts-forks) : Modiffied Bedrock contracts that provide a unified way to access any and all OP-comptaible chains from the L1 and back.
+- [Libraries](#libraries): Libraries that simplify fetching multiple OP chain's addresses.
+- [Bedrock-contract-Forks](#bedrock-contracts-forks) : Modiffied Bedrock contracts that would provide a unified way to access any and all OP-comptaible chains from the L1 and back.
   - [crossDomainMessanger](#cross-domain-messanger)
   - [Standard-Bridge](#standard-bridge)
   - [ERC721Bridge](#erc721-bridge)
-- [etc](#etc-wip) : expriemetnal contracts meant to work on top of the existing Bedrock contracts, much like the [Bedrock-utils](#bedrock-utils) except they aren't functional just yet, and only include an experimental Create2Deployer built on top of the existing crossDomainMessanger
+- [etc](#etc-wip) : expriemetnal contracts meant to work on top of the existing Bedrock contracts, much like the [Bedrock-utils](#bedrock-utils) except they aren't functional just yet, and only include an experimental Create2Deployer.
 
 ## Usage
 
@@ -54,7 +54,7 @@ While the OP team is actively building out the [Interoperability layer](https://
 
 ### Bedrock contracts Forks
 
-These contracts form the cornerstone of our Inter-OP, they build on existing OP contracts, and forked versions of the universal one's, it sets out to make the Original L1 bedrock contracts compatible with bridging to multiple chains at once, this is achieved by modifying only what is neccessary to make the contracts work without needing to change the existing infrastructure for existing OP chain, I.e OP Chains are compatible by default.
+These contracts form the cornerstone of our Inter-OP, they build on existing OP contracts, and forked versions of the universal one's
 
 ### Bedrock Universals Forks
 

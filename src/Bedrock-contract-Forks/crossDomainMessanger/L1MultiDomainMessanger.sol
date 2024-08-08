@@ -6,7 +6,7 @@ import {OptimismPortal} from "@eth-optimism/contracts-bedrock/contracts/L1/Optim
 import {Semver} from "@eth-optimism/contracts-bedrock/contracts/universal/Semver.sol";
 
 import {CrossDomainMessenger} from "../../Bedrock-Universals-Forks/CrossDomainMessengerModified.sol";
-import {OPAddressRegistry_Testnet} from "../../Libraries/OPAddressRegistry_testnet.sol";
+import {OPAddressRegistry_Testnet} from "../../Constants/OPAddressRegistry_testnet.sol";
 
 /**
  * @custom:proxied
