@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.15;
 
-import { CrossDomainMessenger } from "./CrossDomainMessengerModified.sol";
-import { Address } from "@openzeppelin/contracts/utils/Address.sol";
-import { OPAddressRegistry_Testnet , OP_CHAIN_IDS_TESTNETS} from "./../Libraries/OPAddressRegistry_testnet.sol";
+import {CrossDomainMessenger} from "./CrossDomainMessengerModified.sol";
+import {Address} from "@openzeppelin/contracts/utils/Address.sol";
+import {OPAddressRegistry_Testnet, OP_CHAIN_IDS_TESTNETS} from "./../Constants/OPAddressRegistry_testnet.sol";
 
 /**
  * @title ERC721Bridge
@@ -143,14 +143,7 @@ abstract contract ERC721Bridge is OPAddressRegistry_Testnet {
         require(!Address.isContract(msg.sender), "ERC721Bridge: account is not externally owned");
 
         _initiateBridgeERC721(
-            _targetChainID,
-            _localToken,
-            _remoteToken,
-            msg.sender,
-            msg.sender,
-            _tokenId,
-            _minGasLimit,
-            _extraData
+            _targetChainID, _localToken, _remoteToken, msg.sender, msg.sender, _tokenId, _minGasLimit, _extraData
         );
     }
 
@@ -184,14 +177,7 @@ abstract contract ERC721Bridge is OPAddressRegistry_Testnet {
         require(_to != address(0), "ERC721Bridge: nft recipient cannot be address(0)");
 
         _initiateBridgeERC721(
-            _targetChainID,
-            _localToken,
-            _remoteToken,
-            msg.sender,
-            _to,
-            _tokenId,
-            _minGasLimit,
-            _extraData
+            _targetChainID, _localToken, _remoteToken, msg.sender, _to, _tokenId, _minGasLimit, _extraData
         );
     }
 

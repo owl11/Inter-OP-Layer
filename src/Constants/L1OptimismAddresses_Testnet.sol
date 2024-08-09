@@ -4,7 +4,6 @@ pragma solidity ^0.8.0;
 /// @title OP Contracts on L1 (testnet)
 /// @notice Contains constant addresses for Most OP L2's that are documented.
 library OP_CHAINS_ADDRESSES_T {
-    
     //OPTIMISM SEPOLIA PROXY ADDRESSES
     address internal constant OP_L1_CROSS_DOMAIN_MESSENGER = 0x58Cc85b8D04EA49cC6DBd3CbFFd00B4B8D6cb3ef; // ResolvedDelegateProxy which routes calls to L1 cross domain messanger contract
     address internal constant OP_L1_STANDARD_BRIDGE = 0xFBb0621E0B23b5478B630BD55a5f21f67730B0F1; // L1ChugSplashProxy which routes calls to L1 Standard Bridge contract
@@ -21,11 +20,26 @@ library OP_CHAINS_ADDRESSES_T {
     address internal constant BASE_L1_OPTIMISM_PORTAL = 0x49f53e41452C74589E85cA1677426Ba426459e85;
 
     //MODE SEPOLIA PROXY ADDRESSES
-    address internal constant MODE_L1_CROSS_DOMAIN_MESSENGER = 0xc19a60d9E8C27B9A43527c3283B4dd8eDC8bE15C; 
-    address internal constant MODE_L1_STANDARD_BRIDGE = 0xbC5C679879B2965296756CD959C3C739769995E2; 
-    address internal constant MODE_L1_OPTIMISM_PORTAL = 0x320e1580effF37E008F1C92700d1eBa47c1B23fD; 
+    address internal constant MODE_L1_CROSS_DOMAIN_MESSENGER = 0xc19a60d9E8C27B9A43527c3283B4dd8eDC8bE15C;
+    address internal constant MODE_L1_STANDARD_BRIDGE = 0xbC5C679879B2965296756CD959C3C739769995E2;
+    address internal constant MODE_L1_OPTIMISM_PORTAL = 0x320e1580effF37E008F1C92700d1eBa47c1B23fD;
 
-    //Fraxtal SEPOLIA
+    //ORDERLY SEPOLIA PROXY ADDRESSES
+    address internal constant ORDERLY_L1_CROSS_DOMAIN_MESSENGER = 0x5FD6C8D6756C3327f7A368F1cfbc7c003BC7EFC9;
+    address internal constant ORDERLY_L1_STANDARD_BRIDGE = 0x1Af0494040d6904A9F3EE21921de4b359C736333;
+    address internal constant ORDERLY_L1_OPTIMISM_PORTAL = 0xF553A085E84BeB8a4B9a86DcEe507A285F8Ed948;
+
+    //PGN SEPOLIA PROXY ADDRESSES
+    address internal constant PGN_L1_CROSS_DOMAIN_MESSENGER = 0x97f3558Ce48FE71B8CeFA5497708A49531D5A8E1;
+    address internal constant PGN_L1_STANDARD_BRIDGE = 0xFaE6abCAF30D23e233AC7faF747F2fC3a5a6Bfa3;
+    address internal constant PGN_L1_OPTIMISM_PORTAL = 0xF04BdD5353Bb0EFF6CA60CfcC78594278eBfE179;
+
+    //LISK SEPOLIA PROXY ADDRESSES
+    address internal constant LISK_L1_CROSS_DOMAIN_MESSENGER = 0x857824E6234f7733ecA4e9A76804fd1afa1A3A2C;
+    address internal constant LISK_L1_STANDARD_BRIDGE = 0x1Fb30e446eA791cd1f011675E5F3f5311b70faF5;
+    address internal constant LISK_L1_OPTIMISM_PORTAL = 0x857824E6234f7733ecA4e9A76804fd1afa1A3A2C;
+
+    //Fraxtal HOLESKY
     address internal constant FRAXTAL_L1_CROSS_DOMAIN_MESSENGER = 0x45A98115D5722C6cfC48D711e0053758E7C0b8ad;
     address internal constant FRAXTAL_L1_STANDARD_BRIDGE = 0x0BaafC217162f64930909aD9f2B27125121d6332;
     address internal constant FRAXTAL_L1_OPTIMISM_PORTAL = 0xB9c64BfA498d5b9a8398Ed6f46eb76d90dE5505d;

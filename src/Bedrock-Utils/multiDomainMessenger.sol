@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import {ICrossDomainMessenger} from "../interfaces/ICrossDomainMessanger.sol";
-import {OPAddressRegistry_Testnet} from "./../Libraries/OPAddressRegistry_testnet.sol";
+import {OPAddressRegistry_Testnet} from "./../Constants/OPAddressRegistry_testnet.sol";
 
 contract multiDomainMessenger is OPAddressRegistry_Testnet {
     /// @notice Send a greeting message to the specified target chain

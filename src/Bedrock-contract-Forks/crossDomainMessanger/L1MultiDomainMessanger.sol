@@ -6,7 +6,7 @@ import {OptimismPortal} from "@eth-optimism/contracts-bedrock/contracts/L1/Optim
 import {Semver} from "@eth-optimism/contracts-bedrock/contracts/universal/Semver.sol";
 
 import {CrossDomainMessenger} from "../../Bedrock-Universals-Forks/CrossDomainMessengerModified.sol";
-import {OPAddressRegistry_Testnet} from "../../Libraries/OPAddressRegistry_testnet.sol";
+import {OPAddressRegistry_Testnet} from "../../Constants/OPAddressRegistry_testnet.sol";
 
 /**
  * @custom:proxied
@@ -26,9 +26,9 @@ contract L1MultiDomainMessanger is CrossDomainMessenger, Semver {
      *
      * @notice forked from L1 crossDomainMessanger, this implementation is meant to handle multiple OP Portals
      */
-    constructor()
+    constructor(address _l1CrossDomainMessenger)
         Semver(1, 5, 0) // 1.X.0?
-        CrossDomainMessenger(Predeploys.L2_CROSS_DOMAIN_MESSENGER)
+        CrossDomainMessenger(_l1CrossDomainMessenger)
     {
         // PORTAL = _portal;
         initialize();
@@ -57,9 +57,10 @@ contract L1MultiDomainMessanger is CrossDomainMessenger, Semver {
      * @inheritdoc CrossDomainMessenger
      */
     function _isOtherMessenger(uint256 _targetChainID) internal view override returns (bool) {
-        (address crossDomMsger,, address OPPortal) = getAddresses(_targetChainID);
-        return msg.sender == OPPortal
-            && OptimismPortal(payable(OPPortal)).l2Sender() == CrossDomainMessenger(crossDomMsger).OTHER_MESSENGER();
+        (,, address OPPortal) = getAddresses(_targetChainID);
+        return msg.sender == OPPortal;
+        //we have a forked implementation of other messanger
+        // && OptimismPortal(payable(OPPortal)).l2Sender() == OTHER_MESSENGER;
     }
 
     /**
@@ -67,6 +68,7 @@ contract L1MultiDomainMessanger is CrossDomainMessenger, Semver {
      */
     function _isUnsafeTarget(address _target, uint256 _targetChainID) internal view override returns (bool) {
         (,, address OPPortal) = getAddresses(_targetChainID);
-        return _target == address(this) || _target == OPPortal;
+        bool yes = isOPAlligned(_targetChainID);
+        return _target == address(this) || _target == OPPortal || !yes;
     }
 }

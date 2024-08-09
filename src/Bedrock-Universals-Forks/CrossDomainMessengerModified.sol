@@ -6,7 +6,7 @@ import {SafeCall} from "@eth-optimism/contracts-bedrock/contracts/libraries/Safe
 import {Hashing} from "@eth-optimism/contracts-bedrock/contracts/libraries/Hashing.sol";
 import {Encoding} from "@eth-optimism/contracts-bedrock/contracts/libraries/Encoding.sol";
 import {Constants} from "@eth-optimism/contracts-bedrock/contracts/libraries/Constants.sol";
-import {OPAddressRegistry_Testnet} from "../Libraries/OPAddressRegistry_testnet.sol";
+import {OPAddressRegistry_Testnet} from "../Constants/OPAddressRegistry_testnet.sol";
 
 /**
  * @custom:legacy
@@ -403,23 +403,16 @@ abstract contract CrossDomainMessenger is
                 require(failedMessages[versionedHash], "CrossDomainMessenger: message cannot be replayed");
             }
 
-            require(
-                _isUnsafeTarget(_target, _targetChainID) == false,
-                "CrossDomainMessenger: cannot send message to blocked system address"
-            );
+            if (_isUnsafeTarget(_target, _targetChainID) == false) {
+                failedMessages[versionedHash] = true;
+                emit FailedRelayedMessage(versionedHash);
+            }
 
             require(
                 successfulMessages[versionedHash] == false, "CrossDomainMessenger: message has already been relayed"
             );
 
             // TODO write the interop eth layer 1 funcitionality:
-
-            bool yes = isOPAlligned(_targetChainID);
-            if (!yes) {
-                failedMessages[versionedHash] = true;
-                emit FailedRelayedMessage(versionedHash);
-            }
-            //     function sendMessage(uint256 _targetChainID, address _target, bytes calldata _message, uint32 _minGasLimit)
             sendMessage(_targetChainID, _target, _message, 1000000);
             //we assume 1 million gas is enough
         }

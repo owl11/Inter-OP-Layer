@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.15;
 
-import { Predeploys } from "@eth-optimism/contracts-bedrock/contracts/libraries/Predeploys.sol";
-import { Semver } from "@eth-optimism/contracts-bedrock/contracts/universal/Semver.sol";
-import { StandardBridge } from "../../Bedrock-Universals-Forks/StandardBridge.sol";
-import { OptimismMintableERC20 } from "@eth-optimism/contracts-bedrock/contracts/universal/OptimismMintableERC20.sol";
+import {Predeploys} from "@eth-optimism/contracts-bedrock/contracts/libraries/Predeploys.sol";
+import {Semver} from "@eth-optimism/contracts-bedrock/contracts/universal/Semver.sol";
+import {StandardBridge} from "../../Bedrock-Universals-Forks/StandardBridge.sol";
+import {OptimismMintableERC20} from "@eth-optimism/contracts-bedrock/contracts/universal/OptimismMintableERC20.sol";
 
 /**
  * @custom:proxied
- * @custom:predeploy 0x4200000000000000000000000000000000000010
+ * @custom:MODIFIED
  * @title L2StandardBridge
  * @notice The L2StandardBridge is responsible for transfering ETH and ERC20 tokens between L1 and
  *         L2. In the case that an ERC20 token is native to L2, it will be escrowed within this
@@ -18,7 +18,6 @@ import { OptimismMintableERC20 } from "@eth-optimism/contracts-bedrock/contracts
  *         not limited to: tokens with transfer fees, rebasing tokens, and tokens with blocklists.
  */
 contract L2StandardBridge is StandardBridge, Semver {
-
     uint256 public constant ETH_CHAINID = 1;
     /**
      * @custom:legacy
@@ -31,6 +30,7 @@ contract L2StandardBridge is StandardBridge, Semver {
      * @param amount    Amount of the ERC20 withdrawn.
      * @param extraData Extra data attached to the withdrawal.
      */
+
     event WithdrawalInitiated(
         address indexed l1Token,
         address indexed l2Token,
@@ -65,9 +65,10 @@ contract L2StandardBridge is StandardBridge, Semver {
      *
      * @param _otherBridge Address of the L1StandardBridge.
      */
-    constructor(address payable _otherBridge)
+    constructor(address payable _messenger, address payable _otherBridge)
         Semver(1, 1, 0)
-        StandardBridge(payable(Predeploys.L2_CROSS_DOMAIN_MESSENGER), _otherBridge)
+        StandardBridge(_messenger, _otherBridge)
+    // StandardBridge(payable(Predeploys.L2_CROSS_DOMAIN_MESSENGER), _otherBridge)
     {}
 
     /**
@@ -75,12 +76,7 @@ contract L2StandardBridge is StandardBridge, Semver {
      */
     receive() external payable override onlyEOA {
         _initiateWithdrawal(
-            Predeploys.LEGACY_ERC20_ETH,
-            msg.sender,
-            msg.sender,
-            msg.value,
-            RECEIVE_DEFAULT_GAS_LIMIT,
-            bytes("")
+            Predeploys.LEGACY_ERC20_ETH, msg.sender, msg.sender, msg.value, RECEIVE_DEFAULT_GAS_LIMIT, bytes("")
         );
     }
 
@@ -95,12 +91,12 @@ contract L2StandardBridge is StandardBridge, Semver {
      * @param _minGasLimit Minimum gas limit to use for the transaction.
      * @param _extraData   Extra data attached to the withdrawal.
      */
-    function withdraw(
-        address _l2Token,
-        uint256 _amount,
-        uint32 _minGasLimit,
-        bytes calldata _extraData
-    ) external payable virtual onlyEOA {
+    function withdraw(address _l2Token, uint256 _amount, uint32 _minGasLimit, bytes calldata _extraData)
+        external
+        payable
+        virtual
+        onlyEOA
+    {
         _initiateWithdrawal(_l2Token, msg.sender, msg.sender, _amount, _minGasLimit, _extraData);
     }
 
@@ -120,13 +116,11 @@ contract L2StandardBridge is StandardBridge, Semver {
      * @param _minGasLimit Minimum gas limit to use for the transaction.
      * @param _extraData   Extra data attached to the withdrawal.
      */
-    function withdrawTo(
-        address _l2Token,
-        address _to,
-        uint256 _amount,
-        uint32 _minGasLimit,
-        bytes calldata _extraData
-    ) external payable virtual {
+    function withdrawTo(address _l2Token, address _to, uint256 _amount, uint32 _minGasLimit, bytes calldata _extraData)
+        external
+        payable
+        virtual
+    {
         _initiateWithdrawal(_l2Token, msg.sender, _to, _amount, _minGasLimit, _extraData);
     }
 
@@ -200,20 +194,11 @@ contract L2StandardBridge is StandardBridge, Semver {
      *
      * @inheritdoc StandardBridge
      */
-    function _emitETHBridgeInitiated(
-        address _from,
-        address _to,
-        uint256 _amount,
-        bytes memory _extraData
-    ) internal override {
-        emit WithdrawalInitiated(
-            address(0),
-            Predeploys.LEGACY_ERC20_ETH,
-            _from,
-            _to,
-            _amount,
-            _extraData
-        );
+    function _emitETHBridgeInitiated(address _from, address _to, uint256 _amount, bytes memory _extraData)
+        internal
+        override
+    {
+        emit WithdrawalInitiated(address(0), Predeploys.LEGACY_ERC20_ETH, _from, _to, _amount, _extraData);
         super._emitETHBridgeInitiated(_from, _to, _amount, _extraData);
     }
 
@@ -223,20 +208,11 @@ contract L2StandardBridge is StandardBridge, Semver {
      *
      * @inheritdoc StandardBridge
      */
-    function _emitETHBridgeFinalized(
-        address _from,
-        address _to,
-        uint256 _amount,
-        bytes memory _extraData
-    ) internal override {
-        emit DepositFinalized(
-            address(0),
-            Predeploys.LEGACY_ERC20_ETH,
-            _from,
-            _to,
-            _amount,
-            _extraData
-        );
+    function _emitETHBridgeFinalized(address _from, address _to, uint256 _amount, bytes memory _extraData)
+        internal
+        override
+    {
+        emit DepositFinalized(address(0), Predeploys.LEGACY_ERC20_ETH, _from, _to, _amount, _extraData);
         super._emitETHBridgeFinalized(_from, _to, _amount, _extraData);
     }
 
