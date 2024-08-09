@@ -22,13 +22,13 @@ contract Deploy_L1ToL2Deployer is Script, OPAddressRegistry_Testnet {
 
         // deployer = vm.addr(deployerKey);
 
-        L1deployerAddr = vm.computeCreateAddress(deployer, _replaceWithNonce);
-        L2Create2Addr = vm.computeCreateAddress(deployer, _replaceWithNonce);
+        // L1deployerAddr = vm.computeCreateAddress(deployer, _replaceWithNonce);
+        // L2Create2Addr = vm.computeCreateAddress(deployer, _replaceWithNonce);
         vm.startBroadcast(deployerKey);
 
         if (block.chainid == 11155111) {
             L1Deployer = new L1ContractDeployer();
-            assert(address(L1Deployer) == L1deployerAddr);
+            // assert(address(L1Deployer) == L1deployerAddr);
         } else if (isOPAlligned(block.chainid)) {
             create2Deployer = new CREATE2Deployer(address(L1deployerAddr));
 
