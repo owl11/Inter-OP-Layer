@@ -2,7 +2,7 @@
 pragma solidity ^0.8.15;
 
 import {Script} from "forge-std/Script.sol";
-import {HelperConfig, OP_CHAIN_IDS_TESTNETS} from "./HelperConfig.s.sol";
+import {HelperConfig} from "./HelperConfig.s.sol";
 import {Multi_L1STDBridge} from "../src//Bedrock-Utils/Multi_L1STDBridge.sol";
 
 contract DeployMultiBridge is Script {

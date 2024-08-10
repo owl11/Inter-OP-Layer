@@ -4,7 +4,6 @@ pragma solidity ^0.8.0;
 /// @title OP Contracts on L1 (Mainnet)
 /// @notice Contains constant addresses for Most OP L2's that are documented.
 library OP_CHAINS_ADDRESSES_M {
-    
     //OPTIMISM Mainnet PROXY ADDRESSES
     address internal constant OP_L1_CROSS_DOMAIN_MESSENGER = 0x25ace71c97B33Cc4729CF772ae268934F7ab5fA1; // ResolvedDelegateProxy which routes calls to L1 cross domain messanger contract
     address internal constant OP_L1_STANDARD_BRIDGE = 0x99C9fc46f92E8a1c0deC1b1747d010903E884bE1; // L1ChugSplashProxy which routes calls to L1 Standard Bridge contract
@@ -21,9 +20,9 @@ library OP_CHAINS_ADDRESSES_M {
     address internal constant BASE_L1_OPTIMISM_PORTAL = 0x49048044D57e1C92A77f79988d21Fa8fAF74E97e;
 
     //MODE Mainnet
-    address internal constant MODE_L1_CROSS_DOMAIN_MESSENGER = 0x95bDCA6c8EdEB69C98Bd5bd17660BaCef1298A6f; 
-    address internal constant MODE_L1_STANDARD_BRIDGE = 0x735aDBbE72226BD52e818E7181953f42E3b0FF21; 
-    address internal constant MODE_L1_OPTIMISM_PORTAL = 0x8B34b14c7c7123459Cf3076b8Cb929BE097d0C07; 
+    address internal constant MODE_L1_CROSS_DOMAIN_MESSENGER = 0x95bDCA6c8EdEB69C98Bd5bd17660BaCef1298A6f;
+    address internal constant MODE_L1_STANDARD_BRIDGE = 0x735aDBbE72226BD52e818E7181953f42E3b0FF21;
+    address internal constant MODE_L1_OPTIMISM_PORTAL = 0x8B34b14c7c7123459Cf3076b8Cb929BE097d0C07;
 
     //Fraxtal Mainnet
     address internal constant FRAXTAL_L1_CROSS_DOMAIN_MESSENGER = 0x126bcc31Bc076B3d515f60FBC81FddE0B0d542Ed;

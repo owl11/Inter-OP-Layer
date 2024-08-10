@@ -1,0 +1,12 @@
+forge script --chain 11155420 Deploy_L1ToL2Deployer --rpc-url $RPC_OPTIMISM_SEPOLIA --broadcast --verify --etherscan-api-key $BLOCKEXPLORER_OP_SEPOLIA_KEY -vvvv
+forge script --chain 999999999 Deploy_L1ToL2Deployer --rpc-url $RPC_ZORA_SEPOLIA --broadcast -vvvv
+forge script --chain 84532 Deploy_L1ToL2Deployer --rpc-url $RPC_BASE_SEPOLIA --broadcast --verify --etherscan-api-key $BLOCKEXPLORER_BASE_SEPOLIA_KEY -vvvv
+
+forge script --chain 919 Deploy_L1ToL2Deployer --rpc-url $RPC_MODE_SEPOLIA --broadcast -vvvv
+forge script --chain 4202 Deploy_L1ToL2Deployer --rpc-url $RPC_LISK_SEPOLIA --broadcast -vvvv --legacy
+
+forge script --chain 58008 Deploy_L1ToL2Deployer --rpc-url $RPC_PGN_SEPOLIA --broadcast -vvvv --legacy
+forge script --chain 4460 Deploy_L1ToL2Deployer --rpc-url $RPC_ORDERLY_SEPOLIA --broadcast -vvvv --legacy
+
+forge script --chain sepolia Deploy_L1ToL2Deployer --rpc-url $RPC_SEPOLIA --broadcast --verify --etherscan-api-key $BLOCKEXPLORER_SEPOLIA_KEY -vvvv --legacy
+forge script --chain sepolia DeployMultiBridge --rpc-url $RPC_SEPOLIA --broadcast --verify --etherscan-api-key $BLOCKEXPLORER_SEPOLIA_KEY -vvvv --legacy

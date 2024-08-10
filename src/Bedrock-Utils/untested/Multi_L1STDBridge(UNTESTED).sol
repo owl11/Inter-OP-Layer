@@ -1,21 +1,31 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.15;
 
-import {ICrossDomainMessenger} from "../interfaces/ICrossDomainMessanger.sol";
+import {ICrossDomainMessenger} from "../../interfaces/ICrossDomainMessanger.sol";
 import "@eth-optimism/contracts-bedrock/contracts/L1/L1StandardBridge.sol";
-import {OPAddressRegistry_Testnet} from "./../Constants/OPAddressRegistry_testnet.sol";
+import {OPAddressRegistry_Testnet} from "../../Constants/OPAddressRegistry_testnet.sol";
 
 // Custom errors are more gas-efficient than require with string messages
 error NoChainIDs();
-error NoETHSent();
+error NotEnoughETHSent();
 error ArrSizeMissmatch();
 error InvalidChainID();
 
 contract Multi_L1STDBridge is OPAddressRegistry_Testnet {
-    function quickDepositToAnyChain(uint256[] memory chainIDs) external payable {
+    function quickDepositToOPChain(uint256 chainID) external payable {
+        if (msg.value == 0) revert NotEnoughETHSent();
+        (, address STDBridge,) = getAddresses(chainID);
+        zeroAdressCheck(STDBridge);
+
+        // Send the message using the cross-domain messenger
+        L1StandardBridge(payable(STDBridge)).depositETHTo{value: msg.value}(msg.sender, 1000000, "");
+        // Increment in unchecked block to save gas
+    }
+
+    function quickDepositToManyChains(uint256[] memory chainIDs) external payable {
         uint256 length = chainIDs.length;
         if (length == 0) revert NoChainIDs();
-        if (msg.value == 0) revert NoETHSent();
+        if (msg.value == 0) revert NotEnoughETHSent();
 
         uint256 amountPerChain = msg.value / chainIDs.length;
         uint256 chainID;
@@ -29,62 +39,6 @@ contract Multi_L1STDBridge is OPAddressRegistry_Testnet {
             // Send the message using the cross-domain messenger
             L1StandardBridge(payable(STDBridge)).depositETHTo{value: amountPerChain}(msg.sender, 1000000, "");
             // Increment in unchecked block to save gas
-            unchecked {
-                ++i;
-            }
-        }
-    }
-
-    function DepositToMultipleRecipients(
-        uint256[] memory chainIDs,
-        address[] memory _recipient,
-        uint256[] memory _amounts
-    ) external payable {
-        uint256 chainId_length = chainIDs.length;
-        uint256 recipient_length = _recipient.length;
-        uint256 amounts_length = _amounts.length;
-
-        if (chainId_length != recipient_length || chainId_length != amounts_length) revert ArrSizeMissmatch();
-        if (msg.value == 0) revert NoETHSent();
-        // ArrSizeMissmatch
-        uint256 amountPer_recipient;
-        uint256 chainID;
-        address STDBridge;
-
-        for (uint256 i = 0; i < chainId_length;) {
-            chainID = chainIDs[i];
-            amountPer_recipient = _amounts[i];
-            (, STDBridge,) = getAddresses(chainID);
-            zeroAdressCheck(STDBridge);
-
-            L1StandardBridge(payable(STDBridge)).depositETHTo{value: amountPer_recipient}(_recipient[i], 1000000, "");
-            unchecked {
-                ++i;
-            }
-        }
-    }
-
-    function DepositToManyChains(uint256[] memory chainIDs, address _recipient, uint256[] memory _amounts)
-        external
-        payable
-    {
-        uint256 chainId_length = chainIDs.length;
-        uint256 amounts_length = _amounts.length;
-
-        if (chainId_length != amounts_length) revert ArrSizeMissmatch();
-        if (msg.value == 0) revert NoETHSent();
-        // ArrSizeMissmatch
-        uint256 amountPer_chain;
-        uint256 chainID;
-        address STDBridge;
-
-        for (uint256 i = 0; i < chainId_length;) {
-            chainID = chainIDs[i];
-            amountPer_chain = _amounts[i];
-            (, STDBridge,) = getAddresses(chainID);
-            zeroAdressCheck(STDBridge);
-
-            L1StandardBridge(payable(STDBridge)).depositETHTo{value: amountPer_chain}(_recipient, 1000000, "");
             unchecked {
                 ++i;
             }
@@ -111,6 +65,60 @@ contract Multi_L1STDBridge is OPAddressRegistry_Testnet {
             zeroAdressCheck(STDBridge);
             // Send the message using the cross-domain messenger
             L1StandardBridge(payable(STDBridge)).depositETHTo{value: amountPerChain}(msg.sender, 1000000, "");
+            unchecked {
+                ++i;
+            }
+        }
+    }
+
+    function DepositToMultipleRecipients(
+        uint256[] memory chainIDs,
+        address[] memory _recipient,
+        uint256[] memory _amounts
+    ) external payable {
+        uint256 chainId_length = chainIDs.length;
+        uint256 recipient_length = _recipient.length;
+        uint256 amounts_length = _amounts.length;
+
+        if (chainId_length != recipient_length || chainId_length != amounts_length) revert ArrSizeMissmatch();
+        if (msg.value == 0) revert NotEnoughETHSent();
+        // ArrSizeMissmatch
+        uint256 amountPer_recipient;
+        uint256 chainID;
+        address STDBridge;
+
+        for (uint256 i = 0; i < chainId_length;) {
+            chainID = chainIDs[i];
+            amountPer_recipient = _amounts[i];
+            (, STDBridge,) = getAddresses(chainID);
+            zeroAdressCheck(STDBridge);
+
+            L1StandardBridge(payable(STDBridge)).depositETHTo{value: amountPer_recipient}(_recipient[i], 1000000, "");
+            unchecked {
+                ++i;
+            }
+        }
+    }
+
+    function DepositToSameRecipient(uint256[] memory chainIDs, address _recipient, uint256 _amountPerChain)
+        external
+        payable
+    {
+        uint256 chainId_length = chainIDs.length;
+        uint256 amtExpected = _amountPerChain * chainId_length;
+        if (chainId_length < 1) revert NoChainIDs();
+        if (amtExpected > msg.value) revert NotEnoughETHSent();
+        _amountPerChain = msg.value / chainId_length;
+        // ArrSizeMissmatch
+        uint256 chainID;
+        address STDBridge;
+
+        for (uint256 i = 0; i < chainId_length;) {
+            chainID = chainIDs[i];
+            (, STDBridge,) = getAddresses(chainID);
+            zeroAdressCheck(STDBridge);
+
+            L1StandardBridge(payable(STDBridge)).depositETHTo{value: _amountPerChain}(_recipient, 1000000, "");
             unchecked {
                 ++i;
             }

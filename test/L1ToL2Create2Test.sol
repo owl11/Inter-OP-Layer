@@ -7,12 +7,12 @@ import {Test, console} from "forge-std/Test.sol";
 import {StdCheats} from "forge-std/StdCheats.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {OPAddressRegistry_Testnet, OP_CHAIN_IDS_TESTNETS} from "../../src/Constants/OPAddressRegistry_testnet.sol";
-import {CREATE2Deployer} from "../src/etc/CREATE2Deployer.sol";
-import {L1ContractDeployer} from "../src/etc/L1ContractDeployer.sol";
+import {CREATE2Deployer} from "../src/Bedrock-Utils/CREATE2Deployer.sol";
+import {L1ContractDeployer} from "../src/Bedrock-Utils/L1ContractDeployer.sol";
 
 contract L1ToL2Create2Test is StdCheats, Test, OPAddressRegistry_Testnet {
     L1ContractDeployer L1Deployer;
-    CREATE2Deployer create2Deployer;
+    CREATE2Deployer create2Dep;
 
     uint256 deployerPrivateKey;
     uint256 mainnetFork;
@@ -26,7 +26,7 @@ contract L1ToL2Create2Test is StdCheats, Test, OPAddressRegistry_Testnet {
         L1Deployer = new L1ContractDeployer();
         creationCode = L1Deployer.getCreationCode();
 
-        create2Deployer = new CREATE2Deployer(address(L1Deployer));
+        create2Dep = new CREATE2Deployer(address(L1Deployer));
     }
 
     function testL1Simulate() public {
@@ -38,7 +38,7 @@ contract L1ToL2Create2Test is StdCheats, Test, OPAddressRegistry_Testnet {
 
     function testL1ToL2Deploy() public {
         (bool success, bytes memory returnData) =
-            L1Deployer.deployOnL2ForTest(creationCode, address(create2Deployer), 1);
+            L1Deployer.deployOnL2ForTest(creationCode, address(create2Dep), 1);
         console.log(success);
         console.logBytes(returnData);
     }

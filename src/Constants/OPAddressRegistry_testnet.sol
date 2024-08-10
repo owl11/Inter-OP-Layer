@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 
 import {OP_CHAIN_IDS_TESTNETS} from "./OPChainID_Testnet.sol";
-import {L2Create2Addresses} from "../Constants/L2Create2Addresses.sol";
 import {OP_CHAINS_ADDRESSES_T} from "./L1OptimismAddresses_Testnet.sol";
 /// @title OPAddressRegistry
 /// @notice A registry for storing OP chain addresses based on chain IDs.
@@ -23,7 +22,9 @@ contract OPAddressRegistry_Testnet {
 
     // Mapping from chain ID to its corresponding addresses
     mapping(uint256 => ChainAddresses) private OPchainAddressse;
-    mapping(uint256 => address) private OPchainC2Addressse;
+
+    //We got this address on 6 chains (minus Orderly)
+    address constant public C2DEPLOYER = 0xDF4685C2942c7b8518c36d115B6d12C3caC4577a;
 
     // Event to log updates to the registry
     event AddressesUpdated(uint256 indexed chainID, ChainAddresses addresses);
@@ -32,38 +33,18 @@ contract OPAddressRegistry_Testnet {
     constructor() {
         SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.OP_SEPOLIA_TESTNET_CHAIN_ID);
         SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.ZORA_SEPOLIA_TESTNET_CHAIN_ID);
+
         SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.BASE_SEPOLIA_TESTNET_CHAIN_ID);
         SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.MODE_SEPOLIA_TESTNET_CHAIN_ID);
+
         SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.ORDERLY_SEPOLIA_TESTNET_CHAIN_ID);
         SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.LISK_SEPOLIA_TESTNET_CHAIN_ID);
+
         SUPPORTED_CHAIN_IDS_SEPOLIA.push(OP_CHAIN_IDS_TESTNETS.PGN_SEPOLIA_TESTNET_CHAIN_ID);
 
         SUPPORTED_CHAIN_IDS_HOLESKY.push(OP_CHAIN_IDS_TESTNETS.METAL_L2_HOLESKY_CHAIN_ID);
         SUPPORTED_CHAIN_IDS_HOLESKY.push(OP_CHAIN_IDS_TESTNETS.CELO_DANGO_HOLESKY_TESTNET_CHAIN_ID);
         SUPPORTED_CHAIN_IDS_HOLESKY.push(OP_CHAIN_IDS_TESTNETS.FRAXTAL_HOLESKY_TESTNET_CHAIN_ID);
-
-        SUPPORTED_CHAIN_IDS_C2_SEPOLIA.push(L2Create2Addresses.SEPOLIA_CREATE2_OP_ADDR);
-        SUPPORTED_CHAIN_IDS_C2_SEPOLIA.push(L2Create2Addresses.SEPOLIA_CREATE2_ZORA_ADDR);
-        SUPPORTED_CHAIN_IDS_C2_SEPOLIA.push(L2Create2Addresses.SEPOLIA_CREATE2_BASE_ADDR);
-        SUPPORTED_CHAIN_IDS_C2_SEPOLIA.push(L2Create2Addresses.SEPOLIA_CREATE2_MODE_ADDR);
-        SUPPORTED_CHAIN_IDS_C2_SEPOLIA.push(L2Create2Addresses.SEPOLIA_CREATE2_LISK_ADDR);
-        SUPPORTED_CHAIN_IDS_C2_SEPOLIA.push(L2Create2Addresses.SEPOLIA_CREATE2_ORDERLY_ADDR);
-        SUPPORTED_CHAIN_IDS_C2_SEPOLIA.push(L2Create2Addresses.SEPOLIA_CREATE2_PGN_ADDR);
-
-        OPchainC2Addressse[OP_CHAIN_IDS_TESTNETS.OP_SEPOLIA_TESTNET_CHAIN_ID] =
-            L2Create2Addresses.SEPOLIA_CREATE2_OP_ADDR;
-        OPchainC2Addressse[OP_CHAIN_IDS_TESTNETS.ZORA_SEPOLIA_TESTNET_CHAIN_ID] =
-            L2Create2Addresses.SEPOLIA_CREATE2_OP_ADDR;
-        OPchainC2Addressse[OP_CHAIN_IDS_TESTNETS.BASE_SEPOLIA_TESTNET_CHAIN_ID] =
-            L2Create2Addresses.SEPOLIA_CREATE2_OP_ADDR;
-        OPchainC2Addressse[OP_CHAIN_IDS_TESTNETS.MODE_SEPOLIA_TESTNET_CHAIN_ID] =
-            L2Create2Addresses.SEPOLIA_CREATE2_OP_ADDR;
-        OPchainC2Addressse[OP_CHAIN_IDS_TESTNETS.ORDERLY_SEPOLIA_TESTNET_CHAIN_ID] =
-            L2Create2Addresses.SEPOLIA_CREATE2_OP_ADDR;
-        OPchainC2Addressse[OP_CHAIN_IDS_TESTNETS.PGN_SEPOLIA_TESTNET_CHAIN_ID] =
-            L2Create2Addresses.SEPOLIA_CREATE2_OP_ADDR;
-        OPchainC2Addressse[OP_CHAIN_IDS_TESTNETS.LISK_SEPOLIA_TESTNET_CHAIN_ID] =
-            L2Create2Addresses.SEPOLIA_CREATE2_OP_ADDR;
 
         // Example initialization
         OPchainAddressse[OP_CHAIN_IDS_TESTNETS.OP_SEPOLIA_TESTNET_CHAIN_ID] = ChainAddresses({
@@ -130,14 +111,6 @@ contract OPAddressRegistry_Testnet {
             revert();
         }
         return (addresses.crossDomainMessenger, addresses.standardBridge, addresses.optimismPortal);
-    }
-
-    function getC2Addresses(uint256 chainID) public view returns (address _c2Address) {
-        _c2Address = OPchainC2Addressse[chainID];
-        if (_c2Address <= address(0)) {
-            revert();
-        }
-        return (_c2Address);
     }
 
     /// @notice Update the addresses for a specific chain ID

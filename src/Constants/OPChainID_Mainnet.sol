@@ -26,5 +26,4 @@ library OP_CHAIN_IDS_MAINNET {
     // uint256 public constant CELO_DANGO = xxx;
     /// @notice uint256 which represents the ChainId of METAL L2 Mainnet.
     uint256 public constant METAL_L2_MAINNET_CHAIN_ID = 1750;
-    
 }

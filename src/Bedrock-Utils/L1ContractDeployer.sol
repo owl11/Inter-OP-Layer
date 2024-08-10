@@ -1,15 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.15;
 
-// import { ICrossDomainMessenger } from "@eth-optimism/contracts/libraries/bridge/ICrossDomainMessenger.sol";
-// import { CREATE2Deployer } from "./CREATE2Deployer.sol";
 import {OPAddressRegistry_Testnet, OP_CHAIN_IDS_TESTNETS} from "../Constants/OPAddressRegistry_testnet.sol";
-import {L1CrossDomainMessenger} from "@eth-optimism/contracts-bedrock/contracts/L1/L1CrossDomainMessenger.sol";
-import {Greeter} from "./Greeter.sol";
+import {ICrossDomainMessenger} from "../interfaces/ICrossDomainMessanger.sol";
+import {Greeter} from "../etc/Greeter.sol";
 import {CREATE2Deployer} from "./CREATE2Deployer.sol";
 
 contract L1ContractDeployer is OPAddressRegistry_Testnet {
-    CREATE2Deployer create2Deployer;
     uint32 constant TEN_THOUSAND = 10_000;
     uint32 constant ONE_MILLION = 1_000_000;
     uint32 constant THREE_MILLION = 3_000_000;
@@ -22,7 +19,6 @@ contract L1ContractDeployer is OPAddressRegistry_Testnet {
         payable
         returns (bool success, bytes memory returnData)
     {
-        address _l2Deployer = getC2Addresses(_chainID);
         if (_minGasLimit < TEN_THOUSAND) {
             _minGasLimit = 1_000_000; //min gasLimit will be set to 1 million, however it may not be enough to send messange and deploy on the other chain
         }
@@ -33,7 +29,7 @@ contract L1ContractDeployer is OPAddressRegistry_Testnet {
         bytes memory message = abi.encodeWithSignature("deployContract(bytes,bytes32)", _creationCode, salt);
         (messsanger,,) = getAddresses(_chainID);
         // Send the message using the cross-domain messenger
-        L1CrossDomainMessenger(payable(messsanger)).sendMessage{value: msg.value}(_l2Deployer, message, _minGasLimit);
+        ICrossDomainMessenger(payable(messsanger)).sendMessage(OPAddressRegistry_Testnet.C2DEPLOYER, message, _minGasLimit);
         return (success, returnData);
     }
 
@@ -56,7 +52,6 @@ contract L1ContractDeployer is OPAddressRegistry_Testnet {
         address _l2Deployer;
         for (uint256 i = 0; i < length;) {
             chainID = chainIDs[i];
-            _l2Deployer = getC2Addresses(chainID);
 
             (messsanger,,) = getAddresses(chainID);
             // Using assembly for the address check
@@ -68,9 +63,7 @@ contract L1ContractDeployer is OPAddressRegistry_Testnet {
                 }
             }
             // Send the message using the cross-domain messenger
-            L1CrossDomainMessenger(payable(messsanger)).sendMessage{value: msg.value}(
-                _l2Deployer, message, _minGasLimit
-            );
+            ICrossDomainMessenger(payable(messsanger)).sendMessage(OPAddressRegistry_Testnet.C2DEPLOYER, message, _minGasLimit);
             // Increment in unchecked block to save gas
             unchecked {
                 ++i;

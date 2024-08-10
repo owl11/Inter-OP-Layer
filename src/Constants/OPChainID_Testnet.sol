@@ -25,4 +25,6 @@ library OP_CHAIN_IDS_TESTNETS {
     uint256 public constant CELO_DANGO_HOLESKY_TESTNET_CHAIN_ID = 44787;
     /// @notice uint256 which represents the ChainId of FRAXTAL Holesky Testnet.
     uint256 public constant FRAXTAL_HOLESKY_TESTNET_CHAIN_ID = 2522;
+    /// @notice uint256 which represents the ChainId of REDSTONE Sepolia Testnet.
+    uint256 public constant REDSTONE_HOLESKY_TESTNET_CHAIN_ID = 690;
 }
