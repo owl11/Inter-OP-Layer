@@ -155,32 +155,6 @@ contract MultiDomain_L1Bridge is OPAddressRegistry_Testnet {
         }
     }
 
-    function getXorig() public view returns (address) {
-        // Get the cross domain messenger's address each time.
-        // This is less resource intensive than writing to storage.
-        address cdmAddr = address(0);
-
-        // Mainnet
-        if (block.chainid == 1) {
-            cdmAddr = 0x25ace71c97B33Cc4729CF772ae268934F7ab5fA1;
-        }
-
-        // Seploia
-        if (block.chainid == 11155111) {
-            cdmAddr = 0x5086d1eEF304eb5284A0f6720f79403b4e9bE294;
-        }
-
-        // L2's (same address on every network)
-        if (block.chainid == 10 || block.chainid == 11155420 || block.chainid == 84532 || block.chainid == 999999999) {
-            cdmAddr = 0x4200000000000000000000000000000000000007;
-        }
-
-        // If this isn't a cross domain message
-        if (msg.sender != cdmAddr) return address(0);
-
-        // If it is a cross domain message, find out where it is from
-        return ICrossDomainMessenger(cdmAddr).xDomainMessageSender();
-    }
 
     function withdraw(address payable _to) public payable {
         // Call returns a boolean value indicating success or failure.
