@@ -11,7 +11,7 @@ error NoETHSent();
 error ArrSizeMissmatch();
 error InvalidChainID();
 
-contract Multi_L1STDBridge is OPAddressRegistry_Testnet {
+contract MultiDomain_L1Bridge is OPAddressRegistry_Testnet {
     function quickDepositToAnyChain(uint256[] memory chainIDs) external payable {
         uint256 length = chainIDs.length;
         if (length == 0) revert NoChainIDs();

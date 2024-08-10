@@ -4,7 +4,7 @@ pragma solidity ^0.8.15;
 import {Script} from "forge-std/Script.sol";
 import {HelperConfig} from "../script/HelperConfig.s.sol";
 import {DeployMultiBridge} from "../script/DeployMultiBridge.s.sol";
-import {Multi_L1STDBridge} from "../src/Bedrock-Utils/Multi_L1STDBridge.sol";
+import {MultiDomain_L1Bridge} from "../src/Bedrock-Utils/MultiDomain_L1Bridge.sol";
 import {Test, console} from "forge-std/Test.sol";
 import {StdCheats} from "forge-std/StdCheats.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
@@ -22,7 +22,7 @@ contract MultiBridgeTest is StdCheats, Test, OPAddressRegistry_Testnet {
     address public L1OUTb = 0x12608ff9dac79d8443F17A4d39D93317BAD026Aa;
     address public L2OUTb = 0x7c6b91D9Be155A6Db01f749217d76fF02A7227F2;
 
-    Multi_L1STDBridge public multiBridge;
+    MultiDomain_L1Bridge public multiBridge;
     uint256 public deployerKey;
     uint256 constant ONE_ETH = 1 ether;
     uint256 public constant STARTING_USER_BALANCE = 10 ether;

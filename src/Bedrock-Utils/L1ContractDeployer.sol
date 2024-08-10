@@ -29,7 +29,9 @@ contract L1ContractDeployer is OPAddressRegistry_Testnet {
         bytes memory message = abi.encodeWithSignature("deployContract(bytes,bytes32)", _creationCode, salt);
         (messsanger,,) = getAddresses(_chainID);
         // Send the message using the cross-domain messenger
-        ICrossDomainMessenger(payable(messsanger)).sendMessage(OPAddressRegistry_Testnet.C2DEPLOYER, message, _minGasLimit);
+        ICrossDomainMessenger(payable(messsanger)).sendMessage(
+            OPAddressRegistry_Testnet.C2DEPLOYER, message, _minGasLimit
+        );
         return (success, returnData);
     }
 
@@ -49,7 +51,7 @@ contract L1ContractDeployer is OPAddressRegistry_Testnet {
         // Prepare the message to send to the L2 deployer
         bytes memory message = abi.encodeWithSignature("deployContract(bytes,bytes32)", _creationCode, salt);
         uint256 length = chainIDs.length;
-        address _l2Deployer;
+        // address _l2Deployer;
         for (uint256 i = 0; i < length;) {
             chainID = chainIDs[i];
 
@@ -63,7 +65,9 @@ contract L1ContractDeployer is OPAddressRegistry_Testnet {
                 }
             }
             // Send the message using the cross-domain messenger
-            ICrossDomainMessenger(payable(messsanger)).sendMessage(OPAddressRegistry_Testnet.C2DEPLOYER, message, _minGasLimit);
+            ICrossDomainMessenger(payable(messsanger)).sendMessage(
+                OPAddressRegistry_Testnet.C2DEPLOYER, message, _minGasLimit
+            );
             // Increment in unchecked block to save gas
             unchecked {
                 ++i;

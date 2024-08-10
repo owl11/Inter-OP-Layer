@@ -3,15 +3,15 @@ pragma solidity ^0.8.15;
 
 import {Script} from "forge-std/Script.sol";
 import {HelperConfig} from "./HelperConfig.s.sol";
-import {Multi_L1STDBridge} from "../src//Bedrock-Utils/Multi_L1STDBridge.sol";
+import {MultiDomain_L1Bridge} from "../src//Bedrock-Utils/MultiDomain_L1Bridge.sol";
 
 contract DeployMultiBridge is Script {
-    function run() external returns (Multi_L1STDBridge, HelperConfig) {
+    function run() external returns (MultiDomain_L1Bridge, HelperConfig) {
         HelperConfig helperConfig = new HelperConfig(); // This comes with our mocks!
 
         (uint256 deployerKey) = helperConfig.activeNetworkConfig();
         vm.startBroadcast(deployerKey);
-        Multi_L1STDBridge multi_Bridge = new Multi_L1STDBridge();
+        MultiDomain_L1Bridge multi_Bridge = new MultiDomain_L1Bridge();
         vm.stopBroadcast();
         return (multi_Bridge, helperConfig);
     }
