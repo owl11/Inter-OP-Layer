@@ -34,7 +34,7 @@ DISCLAIMER: These contracts have not been audited, and are highly experimental, 
 
 ### Bedrock Utils
 
-Wrapper contracts that are not related to the prior components, they simply enable batch sending and retrieval of multiple OP Chains Bedrock contracts such as the Standard bridge, as well as an expirmental Create2 cross chain deployer, these do not modify any of the existing OP bedrock contracts
+Wrapper contracts on top of multiple OP chain's bed-rock contracts, they simply enable batch sending and retrieval of multiple OP Chains such as the Standard bridge, as well as an expirmental Create2 cross chain deployer, these do not modify any of the existing OP bedrock contracts
 
 ### Constants
 
