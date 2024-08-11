@@ -9,7 +9,7 @@ The Inter-OP Layer is a set of experimental contracts that seek unify the entry 
 DISCLAIMER: These contracts have not been audited, and are highly experimental, they are provided on an "as is" basis, users should proceed at their own risk.
 
 
-- [Bedrock Utils](#Bedrock Utils) : expriemetnal contracts meant to work on top of the existing Bedrock contracts, much like the [Bedrock-utils](#bedrock-utils) except they aren't functional just yet, and only include an experimental Create2Deployer built on top of the existing crossDomainMessanger
+- [Bedrock Utils](#Bedrock-Utils) : expriemetnal contracts meant to work on top of the existing Bedrock contracts, much like the [Bedrock-utils](#bedrock-utils) except they aren't functional just yet, and only include an experimental Create2Deployer built on top of the existing crossDomainMessanger
 
 ## Usage
 
