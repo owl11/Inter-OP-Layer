@@ -4,7 +4,7 @@ While the OP team is actively building out the [Interoperability layer](https://
 
 ### Components
 
-- [Bedrock-Utils](#bedrock-Utils) : Utility contracts that wrap around the existing Standard bridge providing an easy and unified entry point to multiple PO chains, maintaining the status quo of each OP Chain's seperate L1 Cross Domain Messanger
+
 - [Bedrock-Universals-Forks](#bedrock-universals-forks) : The universal Bedrock contracts, modified to enable the the user facing contracts to work with multiple OP Chains (OP Portal's).
 - [Libraries](#libraries): Libraries that make fetching simplify fetching multiple OP chain's addresses for enchanced interoperability.
 - [Bedrock-contract-Forks](#bedrock-contracts-forks) : Modiffied Bedrock contracts that provide a unified way to access any and all OP-comptaible chains from the L1 and back.
