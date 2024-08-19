@@ -1,4 +1,4 @@
-# The Inter-OP Layer [ETHGlobal's Superhack 2024](https://ethglobal.com/showcase/the-inter-op-layer-xvxw2)
+# The Inter-OP Layer [made in ETHGlobal's Superhack 2024](https://ethglobal.com/showcase/the-inter-op-layer-xvxw2)
 
 At the intersection of L2's, we found interoperability.
 
