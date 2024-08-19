@@ -1,5 +1,6 @@
 # The Inter-OP Layer  
 made in [ETHGlobal's Superhack 2024](https://ethglobal.com/showcase/the-inter-op-layer-xvxw2) and winner of the second place in the Fraxtal prize track
+
 At the intersection of L2's, we found interoperability.
 
 ## About
